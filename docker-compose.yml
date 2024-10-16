@@ -1,0 +1,22 @@
+services:
+  dashboard:
+    image: ${DOCKER_REGISTRY-}blazorserver
+    build:
+      context: .
+      dockerfile: src/Server.UI/Server.UI/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5000:8080"
+    depends_on:
+      - sqldb
+    restart: on-failure
+
+  sqldb:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    environment:
+      - "SA_PASSWORD=Password@123"
+      - "ACCEPT_EULA=Y"
+    ports:
+      - "1433:1433"
+
