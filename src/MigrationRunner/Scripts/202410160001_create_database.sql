@@ -1,0 +1,4 @@
+﻿IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'EShop')
+BEGIN
+    CREATE DATABASE EShop;
+END;
